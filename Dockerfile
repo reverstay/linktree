@@ -10,11 +10,11 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Copia a pasta "djangoapp" e "scripts" para dentro do container.
-COPY djangoapp /djangoapp
+COPY linktree /linktree
 COPY scripts /scripts
 
 # Entra na pasta djangoapp no container
-WORKDIR /djangoapp
+WORKDIR /linktree
 
 # A porta 8000 estará disponível para conexões externas ao container
 # É a porta que vamos usar para o Django.
@@ -27,13 +27,13 @@ EXPOSE 8000
 # imagem e torná-la mais eficiente.
 RUN python -m venv /venv && \
   /venv/bin/pip install --upgrade pip && \
-  /venv/bin/pip install -r /djangoapp/requirements.txt && \
-  adduser --disabled-password --no-create-home duser && \
+  /venv/bin/pip install -r /linktree/requirements.txt && \
+  adduser --disabled-password --no-create-home server && \
   mkdir -p /data/web/static && \
   mkdir -p /data/web/media && \
-  chown -R duser:duser /venv && \
-  chown -R duser:duser /data/web/static && \
-  chown -R duser:duser /data/web/media && \
+  chown -R server:server /venv && \
+  chown -R server:server /data/web/static && \
+  chown -R server:server /data/web/media && \
   chmod -R 755 /data/web/static && \
   chmod -R 755 /data/web/media && \
   chmod -R +x /scripts
@@ -42,8 +42,8 @@ RUN python -m venv /venv && \
 # no $PATH do container.
 ENV PATH="/scripts:/venv/bin:$PATH"
 
-# Muda o usuário para duser
-USER duser
+# Muda o usuário para server
+USER server
 
 # Executa o arquivo scripts/commands.sh
 CMD ["commands.sh"]
