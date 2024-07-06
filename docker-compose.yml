@@ -1,12 +1,10 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:13
     env_file:
       - ./keys.env
     volumes:
-      - ./arvores.sql:/docker-entrypoint-initdb.d/arvores.sql
+      - ./scripts/arvores.sql:/docker-entrypoint-initdb.d/arvores.sql
     ports:
       - "5432:5432"
 
@@ -21,6 +19,6 @@ services:
       - ./data/web/static:/data/web/static/
       - ./data/web/media:/data/web/media/
     env_file:
-      - keys.env
+      - ./keys.env
     depends_on:
       - postgres
