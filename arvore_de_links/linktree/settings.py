@@ -2,26 +2,19 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Caminhos base dentro do projeto
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR.parent / 'data' / 'web'
-# DOTENV
-load_dotenv(BASE_DIR.parent / '.env', override=True)
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# Carregar variáveis de ambiente
+load_dotenv(BASE_DIR.parent / 'keys.env', override=True)
+
+# Configurações sensíveis
 SECRET_KEY = os.getenv('SECRET_KEY', 'change-me')
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.getenv('DEBUG', 0)))
+ALLOWED_HOSTS = [h.strip() for h in os.getenv('ALLOWED_HOSTS', '').split(',') if h.strip()]
 
-ALLOWED_HOSTS = [
-    h.strip() for h in os.getenv('ALLOWED_HOSTS', '').split(',')
-    if h.strip()
-]
-
-
-# Application definition
-
+# Definição das aplicações instaladas
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -29,8 +22,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blog',  # Adicione o aplicativo blog aqui
+    'django_summernote',  # Adicione o django_summernote aqui
 ]
 
+# Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -43,10 +39,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'linktree.urls'
 
+# Configurações de templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # Adicione o diretório de templates aqui
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -61,10 +58,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'linktree.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+# Configurações do banco de dados
 DATABASES = {
     'default': {
         'ENGINE': os.getenv('DB_ENGINE', 'change-me'),
@@ -76,10 +70,7 @@ DATABASES = {
     }
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
-
+# Validação de senha
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -95,29 +86,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
-
+# Internacionalização
 LANGUAGE_CODE = 'pt-us'
-
 TIME_ZONE = 'America/Sao_Paulo'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
+# Arquivos estáticos e media
 STATIC_URL = '/static/'
 STATIC_ROOT = DATA_DIR / 'static'
-
 MEDIA_URL = '/media/'
-# /data/web/media
 MEDIA_ROOT = DATA_DIR / 'media'
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
+# Tipo de campo de chave primária padrão
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

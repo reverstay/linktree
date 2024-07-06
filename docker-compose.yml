@@ -1,24 +1,26 @@
-version: '3.9'
+version: '3.8'
 
 services:
+  postgres:
+    image: postgres:13
+    env_file:
+      - ./keys.env
+    volumes:
+      - ./arvores.sql:/docker-entrypoint-initdb.d/arvores.sql
+    ports:
+      - "5432:5432"
+
   arvore_de_links:
     container_name: arvore_de_links
     build:
       context: .
     ports:
-      - 8000:8000
+      - "8000:8000"
     volumes:
       - ./arvore_de_links:/arvore_de_links
       - ./data/web/static:/data/web/static/
       - ./data/web/media:/data/web/media/
     env_file:
-      - ./dotenv_files/.env
+      - keys.env
     depends_on:
-      - psql
-  psql:
-    container_name: psql
-    image: postgres:13-alpine
-    volumes:
-      - ./data/postgres/data:/var/lib/postgresql/data/
-    env_file:
-      - .env
+      - postgres
