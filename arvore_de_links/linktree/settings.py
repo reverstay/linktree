@@ -30,6 +30,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # Adicionando suporte a internacionalização
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -51,6 +52,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',  # Adicionando suporte a internacionalização
             ],
         },
     },
@@ -61,7 +63,7 @@ WSGI_APPLICATION = 'linktree.wsgi.application'
 # Configurações do banco de dados
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DB_ENGINE', 'change-me'),
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('POSTGRES_DB', 'change-me'),
         'USER': os.getenv('POSTGRES_USER', 'change-me'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'change-me'),
@@ -88,13 +90,29 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internacionalização
 LANGUAGE_CODE = 'pt-us'
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('pt', 'Portuguese'),
+    ('es', 'Spanish'),
+]
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+    ]
+
 TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
+USE_L10N = True
 USE_TZ = True
 
-# Arquivos estáticos e media
+
+
 STATIC_URL = '/static/'
-STATIC_ROOT = DATA_DIR / 'static'
+STATICFILES_DIRS = [
+    BASE_DIR / 'blog' / 'templates' / 'blog' / 'css'
+]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = DATA_DIR / 'media'
 
