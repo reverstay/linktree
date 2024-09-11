@@ -8,12 +8,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
-    path('', RedirectView.as_view(url='/blog/', permanent=True)),  # Redireciona a URL raiz para /blog/
+    path('', RedirectView. as_view(url='/blog/', permanent=True)),  # Redireciona a URL raiz para /blog/
 ]
-
 
 if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL,
         document_root=settings.MEDIA_ROOT
     )
+
+
+
