@@ -3,6 +3,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages  # Adicionar esta linha
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm  # Importe o novo formulário personalizado
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+
+@login_required  # Garante que apenas usuários logados podem acessar essa página
+def home_view(request):
+    # Aqui você pode buscar os dados que quer mostrar na página inicial, como notificações, feed, etc.
+    return render(request, 'sistema_iot/home.html')
 
 def index(request):
     theme = request.GET.get('theme')

@@ -125,3 +125,6 @@ MEDIA_ROOT = DATA_DIR / 'media'  # Diretório onde os arquivos de mídia são ar
 
 # Define o tipo de campo de chave primária padrão para os modelos do Django.
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'  # Define que o Django vai usar automaticamente um campo BigAutoField como chave primária.
+
+
+LOGIN_REDIRECT_URL = '/home/'  # URL para onde o usuário será redirecionado após o login

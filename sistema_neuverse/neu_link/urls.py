@@ -20,6 +20,7 @@ urlpatterns = [
 
     # Redireciona a URL raiz para /sistema_iot/
     path('', RedirectView.as_view(url='/sistema_iot/', permanent=True)),
+    path('home/', sistema_iot_views.home_view, name='home'),
 ]
 
 # Configurações de arquivos estáticos no modo DEBUG
