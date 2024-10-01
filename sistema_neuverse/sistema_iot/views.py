@@ -2,6 +2,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages  # Adicionar esta linha
 from django.shortcuts import render, redirect
+from .forms import CustomUserCreationForm  # Importe o novo formulário personalizado
 
 def index(request):
     theme = request.GET.get('theme')
@@ -12,11 +13,11 @@ def index(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()  # Salva o novo usuário
+            form.save()
             messages.success(request, 'Sua conta foi criada com sucesso! Você já pode fazer login.')
-            return redirect('login')  # Redireciona para a página de login após o registro
+            return redirect('login')
     else:
-        form = UserCreationForm()  # Formulário vazio para GET
+        form = CustomUserCreationForm()
     return render(request, 'sistema_iot/register.html', {'form': form})
