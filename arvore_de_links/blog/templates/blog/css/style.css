@@ -117,3 +117,26 @@ body.dark-theme .card-body label {
         margin-bottom: 1rem;
     }
 }
+/* Estilos para o tema claro */
+body.light-theme nav {
+    background-color: #f8f9fa;
+    color: #000;
+}
+
+body.light-theme .navbar-light .navbar-brand {
+    color: #000;
+}
+
+body.light-theme .navbar-light .navbar-nav .nav-link {
+    color: #000;
+}
+
+/* Estilo para tema claro */
+body.light-theme .bg-light {
+    background-color: #689bce !important;  /* Cor do tema claro */
+}
+
+/* Estilo para tema escuro */
+body.dark-theme .bg-light {
+    background-color: #343a40 !important;  /* Cor do tema escuro */
+}
