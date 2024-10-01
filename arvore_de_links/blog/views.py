@@ -21,7 +21,7 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'blog/register.html', {'form': form, 'theme': theme})
 
-def login_view(request):
+def login(request):
     theme = request.session.get('theme', 'light')
     if request.method == 'POST':
         username = request.POST['username']
