@@ -18,7 +18,7 @@ DEBUG = bool(int(os.getenv('DEBUG', 0)))  # DEBUG deve estar desligado (False) e
 ALLOWED_HOSTS = [h.strip() for h in os.getenv('ALLOWED_HOSTS', '').split(',') if h.strip()]  # Define os hosts permitidos para evitar acessos não autorizados.
 
 # Lista de aplicativos Django que serão carregados no projeto.
-# Estes incluem apps padrão como autenticação, sessões e arquivos estáticos, além de apps personalizados como o 'blog'.
+# Estes incluem apps padrão como autenticação, sessões e arquivos estáticos, além de apps personalizados como o 'sistema_iot'.
 INSTALLED_APPS = [
     'django.contrib.admin',  # Painel administrativo do Django.
     'django.contrib.auth',  # Sistema de autenticação e permissões.
@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',  # Sistema de mensagens (flash messages).
     'django.contrib.staticfiles',
     'widget_tweaks',# Gerenciamento de arquivos estáticos como CSS e JavaScript.
-    'blog',  # Aplicativo personalizado, no caso aqui, um blog.
+    'sistema_iot',  # Aplicativo personalizado, no caso aqui, um sistema_iot.
     'django_summernote',  # Plugin de editor de texto rico.
 ]
 
@@ -44,7 +44,7 @@ MIDDLEWARE = [
 ]
 
 # Configura o arquivo principal de URLs do projeto (geralmente urls.py).
-ROOT_URLCONF = 'linktree.urls'
+ROOT_URLCONF = 'neu_link.urls'
 
 # Configuração de templates (HTML). Define onde o Django deve procurar por arquivos de templates.
 # O Django pode usar templates definidos tanto nos diretórios dos apps quanto em diretórios customizados (como o '/templates').
@@ -66,7 +66,7 @@ TEMPLATES = [
 ]
 
 # Configuração do WSGI (Web Server Gateway Interface), necessário para que o Django se comunique com o servidor web.
-WSGI_APPLICATION = 'linktree.wsgi.application'
+WSGI_APPLICATION = 'neu_link.wsgi.application'
 
 # Configuração do banco de dados. Neste caso, usa-se o PostgreSQL.
 # Todas as credenciais do banco estão carregadas das variáveis de ambiente, o que é uma prática recomendada para segurança.
@@ -117,7 +117,7 @@ USE_TZ = True  # Ativa o uso de fusos horários.
 # Configurações de arquivos estáticos (CSS, JS, imagens) e mídia (arquivos enviados pelos usuários).
 STATIC_URL = '/static/'  # URL para acessar arquivos estáticos.
 STATICFILES_DIRS = [  # Diretórios onde o Django procura por arquivos estáticos.
-    BASE_DIR / 'blog' / 'templates' / 'blog' / 'css'
+    BASE_DIR / 'sistema_iot' / 'templates' / 'sistema_iot' / 'css'
 ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # Diretório onde o comando 'collectstatic' vai armazenar os arquivos estáticos em produção.
 MEDIA_URL = '/media/'  # URL para acessar arquivos de mídia enviados pelo usuário.

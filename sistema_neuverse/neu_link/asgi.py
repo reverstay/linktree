@@ -1,5 +1,5 @@
 """
-ASGI config for linktree project.
+ASGI config for neu_link project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'linktree.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'neu_link.settings')
 
 application = get_asgi_application()

@@ -8,14 +8,14 @@ services:
     ports:
       - "5432:5432"
 
-  arvore_de_links:
-    container_name: arvore_de_links
+  sistema_neuverse:
+    container_name: sistema_neuverse
     build:
       context: .
     ports:
       - "8000:8000"
     volumes:
-      - ./arvore_de_links:/arvore_de_links
+      - ./sistema_neuverse:/sistema_neuverse
       - ./data/web/static:/data/web/static/
       - ./data/web/media:/data/web/media/
     env_file:

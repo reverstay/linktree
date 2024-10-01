@@ -3,17 +3,17 @@ FROM python:3.12.4-slim
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-COPY arvore_de_links /arvore_de_links
+COPY sistema_neuverse /arvore_de_links
 COPY scripts /scripts
-COPY requirements.txt /arvore_de_links/
+COPY requirements.txt /sistema_neuverse/
 
-WORKDIR /arvore_de_links
+WORKDIR /sistema_neuverse
 
 EXPOSE 8000
 
 RUN python -m venv /venv && \
     /venv/bin/pip install --upgrade pip && \
-    /venv/bin/pip install --default-timeout=100 -r /arvore_de_links/requirements.txt && \
+    /venv/bin/pip install --default-timeout=100 -r /sistema_neuverse/requirements.txt && \
     adduser --disabled-password --no-create-home server && \
     mkdir -p /data/web/static && \
     mkdir -p /data/web/media && \
